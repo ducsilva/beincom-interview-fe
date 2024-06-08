@@ -1,6 +1,4 @@
 
-"use client"
-
 interface Props {
     seoTitle?: string | any;
     seoDescription?: string;

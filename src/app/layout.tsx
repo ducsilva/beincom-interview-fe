@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "../styles/index.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthProvider } from "@/contexts";
+import { AuthProvider, TabsProvider } from "@/contexts";
 import { ToastContainer } from "react-toastify";
 
 
@@ -22,7 +22,9 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           <ToastContainer />
           <AuthProvider>
-            {children}
+            <TabsProvider>
+              {children}
+            </TabsProvider>
           </AuthProvider>
         </QueryClientProvider>
       </body>

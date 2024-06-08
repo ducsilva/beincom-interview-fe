@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const withMT = require("@material-tailwind/react/utils/withMT");
 
 const config: Config = {
   content: [
@@ -13,8 +14,12 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      boxShadow: {
+        shadow1:
+          "0px 1px 2px 0 rgba(0,0,0,.05),0px 1px 2px -1px rgba(0,0,0,.1)",
+      },
     },
   },
   plugins: [],
 };
-export default config;
+export default withMT(config);

@@ -1,10 +1,14 @@
 "use client";
 
-export const Home = () => {
+import withAuth from "@/hoc/withAuth";
+
+const Home = () => {
 
     return (
-        <header>
+        <div className="mt-16">
             Home
-        </header>
+        </div>
     );
 };
+
+export default withAuth(Home)

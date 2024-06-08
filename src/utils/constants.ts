@@ -17,3 +17,16 @@ export const QueryKeys = {
   GET_CATEGORY: "categoryList",
   PROFILE: "profile",
 };
+
+export enum EMenuType {
+  profile = "profile",
+  dailyMissions = "dailyMissions",
+  manageContent = "manageContent",
+  settings = "settings",
+  logout = "logout",
+}
+
+export enum EnumTabs {
+  home = "home",
+  community = "community",
+}
