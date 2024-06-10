@@ -5,8 +5,10 @@ import {
   UserCircleIcon,
   HomeIcon,
   UserGroupIcon,
+  PencilIcon,
+  TrashIcon,
 } from "@heroicons/react/24/solid";
-import { EMenuType, EnumTabs } from "./constants";
+import { EActionType, EMenuType, EnumTabs } from "./constants";
 
 export const profileMenuItems = [
   {
@@ -33,6 +35,19 @@ export const profileMenuItems = [
     label: "Log Out",
     icon: PowerIcon,
     type: EMenuType.logout,
+  },
+];
+
+export const commentMenuItems = [
+  {
+    label: "Edit comment",
+    icon: PencilIcon,
+    type: EActionType.update,
+  },
+  {
+    label: "Delete Comment",
+    icon: TrashIcon,
+    type: EActionType.delete,
   },
 ];
 

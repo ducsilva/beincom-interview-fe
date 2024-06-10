@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     domains: ["localhost"],
     remotePatterns: [
@@ -16,6 +25,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "group.beincom.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname:
+          "bic-pro-entity-attribute-s3-bucket.s3.ap-southeast-1.amazonaws.com",
         port: "",
       },
     ],

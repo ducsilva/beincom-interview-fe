@@ -16,6 +16,13 @@ const betweenFullName = "Full Name must be between 3 to 64 characters";
 const requireUsername = "User Name is required";
 const betweenUsername = "User Name must be between 5 to 50 characters";
 const requirePolicy = "You must accept Our Privacy and Terms";
+const requireTitle = "Title is required";
+const requireContent = "Content is required";
+const requireCategory = "Category is required";
+const requireBanner = "Banner image is required";
+const unsupportedFormat = "Unsupported file format";
+const requireCategoryName = "Category name is required";
+const requireComment = "Comment is required";
 
 const signUpSchema = yup.object().shape({
   email: yup.string().required(requireEmail).email(emailMessage),
@@ -51,4 +58,39 @@ const loginSchema = yup.object().shape({
   password: yup.string().required(requirePassword),
 });
 
-export { signUpSchema, loginSchema };
+const createPostSChema = yup.object().shape({
+  title: yup.string().required(requireTitle),
+  content: yup.string().required(requireContent),
+  category: yup
+    .object()
+    .shape({
+      value: yup.string().required(requireCategory),
+    })
+    .nullable()
+    .required(requireCategory),
+  banner: yup
+    .mixed()
+    .required(requireBanner)
+    .test("fileType", unsupportedFormat, (value: File) => {
+      return value && ["image/jpeg", "image/png"].includes(value.type);
+    })
+    .test("fileSize", "File too large", (value: File) => {
+      return value && value.size <= 5 * 1024 * 1024;
+    }),
+});
+
+const createCategorySChema = yup.object().shape({
+  name: yup.string().required(requireCategoryName),
+});
+
+const commentSchema = yup.object().shape({
+  content: yup.string().required(requireComment),
+});
+
+export {
+  signUpSchema,
+  loginSchema,
+  createPostSChema,
+  createCategorySChema,
+  commentSchema,
+};
