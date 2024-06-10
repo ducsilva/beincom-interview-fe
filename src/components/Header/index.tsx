@@ -10,21 +10,18 @@ import {
     Menu,
     MenuHandler,
     MenuList,
-    MenuItem,
-    Avatar,
-    Input,
+    MenuItem, Input,
     Tabs,
     TabsHeader,
-    Tab,
+    Tab
 } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { useAuth, useTabs } from "@/contexts";
+import { useAuth, useHeader } from "@/contexts";
 import { ArrayTabs, EMenuType, profileMenuItems } from "@/utils";
 
 export const Header = () => {
     const { user, logout } = useAuth();
-    const { activeTab, setActiveTab } = useTabs();
-    console.log("🚀 ~ Header ~ activeTab:", activeTab);
+    const { activeTab, setActiveTab } = useHeader();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const closeMenu = () => setIsMenuOpen(false);
 
@@ -122,12 +119,12 @@ export const Header = () => {
                             color="blue-gray"
                             className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
                         >
-                            <Avatar
-                                variant="circular"
-                                size="sm"
-                                alt="tania andrew"
-                                className="border border-gray-900 p-0.5"
-                                src="https://res.cloudinary.com/dxs1zdei2/image/upload/v1652436107/12-127977_youtuber-avatar-avatar-dev-hd-png-download_sstjb0.png"
+                            <Image
+                                className="!box-border aspect-square h-full w-full object-cover overflow-hidden bg-neutral-1 border-neutral-1 border-[1.5px] rounded-full"
+                                alt="Avatar"
+                                src="https://bic-pro-entity-attribute-s3-bucket.s3.ap-southeast-1.amazonaws.com/static/user/default-avatar.png"
+                                width={30}
+                                height={30}
                             />
                             <ChevronDownIcon
                                 strokeWidth={2.5}

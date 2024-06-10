@@ -3,9 +3,8 @@ import { Inter } from "next/font/google";
 import "../styles/index.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthProvider, TabsProvider } from "@/contexts";
+import { AuthProvider, HeaderProvider } from "@/contexts";
 import { ToastContainer } from "react-toastify";
-
 
 const inter = Inter({ subsets: ["latin"] });
 const queryClient = new QueryClient();
@@ -22,9 +21,9 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           <ToastContainer />
           <AuthProvider>
-            <TabsProvider>
+            <HeaderProvider>
               {children}
-            </TabsProvider>
+            </HeaderProvider>
           </AuthProvider>
         </QueryClientProvider>
       </body>

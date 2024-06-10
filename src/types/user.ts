@@ -6,6 +6,7 @@ export interface IUser {
   role?: string; // "USER";
   updatedAt?: string; // "2024-05-13T05:11:06.609Z";
   username?: string; // "darkness";
+  fullname?: string; // "darkness";
   avatar?: string;
   designation?: string;
 }

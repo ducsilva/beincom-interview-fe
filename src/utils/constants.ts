@@ -6,6 +6,10 @@ export const ENDPOINT_URL = {
   GET_DETAIL_POST: "posts",
   CREATE_POST: "posts",
   GET_CATEGORY_LIST: "category",
+  CREATE_CATEGORY: "category",
+  CREATE_COMMENT: "comments",
+  UPDATE_COMMENT: "comments",
+  DELETE_COMMENT: "comments",
 };
 
 export const TOKEN_MANAGEMENT = {
@@ -29,4 +33,9 @@ export enum EMenuType {
 export enum EnumTabs {
   home = "home",
   community = "community",
+}
+
+export enum EActionType {
+  update = "update",
+  delete = "delete",
 }

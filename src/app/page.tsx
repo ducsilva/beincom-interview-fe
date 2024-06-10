@@ -1,5 +1,5 @@
 "use client"
-import { Header, MetaDataCom, ScrollToTop } from "@/components";
+import { Header, MetaDataCom } from "@/components";
 import withAuth from "@/hoc/withAuth";
 import { Metadata } from "next";
 
@@ -18,7 +18,6 @@ const Home = () => {
         <div className="flex flex-row mt-16">
             <div className="sidebar">Home</div>
         </div>
-        <ScrollToTop />
     </>
 }
 

@@ -8,7 +8,7 @@ import { Header } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function HomeLayout({
+export default function PostDetailLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
