@@ -2,7 +2,7 @@
 
 import { ISignIn } from "@/types";
 import { useMutation } from "@tanstack/react-query";
-import { authService, userService } from "@/services";
+import { authService } from "@/services";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { Metadata } from "next";
@@ -52,12 +52,12 @@ const LoginPage = () => {
                     className: "text-fuchsia-400 text-sm",
                 });
 
-                const profile: any = await userService.getProfile();
-                console.log("🚀 ~ onSuccess: ~ profile:", profile);
-                if (!!profile) {
-                    setUser(profile);
-                }
+                // const profile: any = await userService.getProfile();
+                // console.log("🚀 ~ onSuccess: ~ profile:", profile);
+                // if (!!profile) {
+                //     setUser(profile);
                 router.push("/home");
+                // }
             },
             onError: (err: any) => {
                 toast(`🦄 ${err?.data?.message || "Login failed! Please try again"}`, {

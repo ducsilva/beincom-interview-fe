@@ -12,6 +12,7 @@ import { createPostSChema } from "@/utils";
 import { Button } from "@material-tailwind/react";
 import { useCallback, useState } from "react";
 import AddCategory from "./AddCategory";
+import { useHeader } from "@/contexts";
 
 interface IPostFormProps {
   closeModal?: () => void;
@@ -38,10 +39,12 @@ const customStyles = {
 
 const PostForm = ({ isOpen, closeModal }: IPostFormProps) => {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
+  const { currentPage } = useHeader()
+
   const { categoryList }: { categoryList: any } = useCategory(
     { limit: 100, page: 1 }
   );
-  const { refetch } = usePosts({})
+  const { refetch } = usePosts({ page: currentPage, limit: 2 })
 
   const {
     register,

@@ -20,6 +20,7 @@ const requireTitle = "Title is required";
 const requireContent = "Content is required";
 const requireCategory = "Category is required";
 const requireBanner = "Banner image is required";
+const requireAvatar = "Banner image is required";
 const unsupportedFormat = "Unsupported file format";
 const requireCategoryName = "Category name is required";
 const requireComment = "Comment is required";
@@ -87,10 +88,23 @@ const commentSchema = yup.object().shape({
   content: yup.string().required(requireComment),
 });
 
+const uploadAvatarSchema = yup.object().shape({
+  avatar: yup
+    .mixed()
+    .required(requireAvatar)
+    .test("fileType", unsupportedFormat, (value: File) => {
+      return value && ["image/jpeg", "image/png"].includes(value.type);
+    })
+    .test("fileSize", "File too large", (value: File) => {
+      return value && value.size <= 1 * 1024 * 1024;
+    }),
+});
+
 export {
   signUpSchema,
   loginSchema,
   createPostSChema,
   createCategorySChema,
   commentSchema,
+  uploadAvatarSchema,
 };

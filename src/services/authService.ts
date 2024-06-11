@@ -15,7 +15,6 @@ export const authService = {
     username,
     fullname,
   }: ISignUp): Promise<void> {
-    console.log("signUp", email, password, username, fullname);
     return await axiosInstance.post(ENDPOINT_URL.SIGNUP, {
       email,
       password,

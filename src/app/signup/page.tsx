@@ -74,7 +74,6 @@ const SignUpPage = () => {
                 router.push("/login");
             },
             onError: (err: any) => {
-                console.log("🚀 ~ onSubmit ~ err:", err)
                 toast(`🦄 ${err?.data?.message || "Register failed! Please try again"}`, {
                     position: "top-right",
                     autoClose: 5000,

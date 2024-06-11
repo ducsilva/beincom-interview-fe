@@ -6,10 +6,7 @@ import { IParams, TPost } from "@/types";
 import { QueryKeys } from "@/utils";
 import { postService } from "@/services";
 
-export const usePosts = (
-  { limit = 10, page = 1 }: IParams,
-  postId?: string
-) => {
+export const usePosts = ({ limit, page }: IParams, postId?: string) => {
   const [params] = useState<IParams>({
     limit,
     page,
@@ -40,6 +37,7 @@ export const usePosts = (
       return allPages.length + 1;
     },
     enabled: !!page || !!limit,
+    staleTime: 10000000,
   });
 
   const { data: postDetail }: { data: TPost } = useQuery({

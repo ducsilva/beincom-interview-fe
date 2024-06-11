@@ -10,6 +10,7 @@ export interface TPost {
   updatedAt?: string;
   createdAt?: string;
   id?: string | number;
+  _id?: string | number;
   comments: IComment[];
 }
 
