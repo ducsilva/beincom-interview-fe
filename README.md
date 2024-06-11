@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Beincom](https://github.com/ducsilva/beincom-interview-fe) project bootstrapped with [`next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+First, you need to clone the project:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:ducsilva/beincom-interview-fe.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After cloning the project, you need to install the required packages:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Creating a new environment variable:
 
-## Learn More
+In the root of the project, you can create a new environment file named: .env. You have two options to configure the environment to run the FE project:
 
-To learn more about Next.js, take a look at the following resources:
+## Options 1: Copy the environment variables below into the .env file inside the FE project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+BASE_URL=https://beincom-interview-be.onrender.com/api/v1/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Options 2: Run a private server from this repository:
 
-## Deploy on Vercel
+```bash
+git clone git@github.com:ducsilva/beincom-interview-be.git
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+After cloning the BE project, you need to install the required packages:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+yarn install
+```
+
+# Add a .env file in the root of the BE server with the following content:
+
+PORT = 4000
+JWT_SECRET=5b5d4373b52394e8bc6be526991585de3e9726439586f80d3f2697169526ab9b
+MONGOOSE_URI=mongodb+srv://ducsilva1307:Minhduc13071992%40@trungka.xpiqot3.mongodb.net/beincom-interview?retryWrites=true&w=majority&appName=trungka
+CLOUDINARY_NAME=dsy1sswel
+CLOUDINARY_API_KEY=145857621656138
+CLOUDINARY_API_SECRET=52ObYXCPksyTZLnlvvOKC52R4WI
+
+# Then run the server with:
+
+```bash
+yarn start:dev
+```
+
+Your server will listen port 4000
+
+# Now, copy the following line into the .env file of the FE project. Your FE project will listen to the server with:
+
+```bash
+BASE_URL=http://localhost:4000/api/v1/
+```
+
+###### IMPORTANT IF YOU CHOICE OPTIONS 1:
+
+My server hosted with BASE_URL = https://beincom-interview-be.onrender.com/api/v1/ will take at least 60 seconds to wake up. Because I'm using a trial plan of a third-party service, free instances spin down after periods of inactivity.
