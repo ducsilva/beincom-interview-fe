@@ -51,12 +51,12 @@ yarn start:dev
 
 Your server will listen port 4000
 
-# Now, copy the following line into the .env file of the FE project. Your FE project will listen to the server with:
+##### Now, copy the following line into the .env file of the FE project. Your FE project will listen to the server with:
 
 ```bash
 BASE_URL=http://localhost:4000/api/v1/
 ```
 
-###### IMPORTANT IF YOU CHOICE OPTIONS 1:
+# IMPORTANT IF YOU CHOICE OPTIONS 1:
 
 My server hosted with BASE_URL = https://beincom-interview-be.onrender.com/api/v1/ will take at least 60 seconds to wake up. Because I'm using a trial plan of a third-party service, free instances spin down after periods of inactivity.
