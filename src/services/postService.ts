@@ -11,6 +11,11 @@ export const postService = {
   async getPostDetail(id: string): Promise<void> {
     return await axiosInstance.get(`${ENDPOINT_URL.GET_DETAIL_POST}/${id}`);
   },
+  async getSearchList(keyword: string): Promise<void> {
+    return await axiosInstance.get(
+      `${ENDPOINT_URL.SEARCH_POST_LIST}?query=${keyword}`
+    );
+  },
   async createNewPost(params): Promise<void> {
     const config = {
       headers: {

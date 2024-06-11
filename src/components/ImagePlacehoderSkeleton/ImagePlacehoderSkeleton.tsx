@@ -1,3 +1,4 @@
+import { DEFAULT_AVATAR } from "@/utils";
 import { Typography } from "@material-tailwind/react";
 import Image from "next/image";
 
@@ -8,7 +9,7 @@ export function ImagePlacehoderSkeleton() {
                 <Image
                     className="!box-border aspect-square  object-cover overflow-hidden bg-neutral-1 border-neutral-1 border-[1.5px] rounded-full"
                     alt="Avatar"
-                    src="https://bic-pro-entity-attribute-s3-bucket.s3.ap-southeast-1.amazonaws.com/static/user/default-avatar.png"
+                    src={DEFAULT_AVATAR}
                     width={50}
                     height={50}
                 />

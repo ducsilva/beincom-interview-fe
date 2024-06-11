@@ -6,6 +6,7 @@ import { usePosts } from "@/hooks/usePosts";
 import { Audio } from "react-loader-spinner";
 import moment from "moment";
 import { MetaDataCom } from "@/components";
+import { DEFAULT_AVATAR } from "@/utils";
 
 
 const metadata: Metadata = {
@@ -25,7 +26,7 @@ const PostDetailPage = ({ params }) => {
       />
       <section className="pb-[120px] pt-[150px]">
         {
-          isFetching || !postDetail ? <div className="container justify-center">
+          isFetching || !postDetail ? <div className="flex justify-center">
             <div className="flex w-full h-96 items-center justify-center">
               <Audio
                 height="80"
@@ -34,7 +35,7 @@ const PostDetailPage = ({ params }) => {
                 ariaLabel="loading"
               />
             </div>
-          </div> : <div className="container">
+          </div> : <div className="flex justify-center w-full">
             <div className="-mx-4 flex flex-wrap justify-center">
               <div className="w-full px-4 lg:w-8/12">
                 <div>
@@ -47,7 +48,7 @@ const PostDetailPage = ({ params }) => {
                         <div className="mr-4">
                           <div className="relative h-10 w-10 overflow-hidden rounded-full">
                             <Image
-                              src={postDetail?.user?.avatar || "/images/blog/author-02.png"}
+                              src={postDetail?.user?.avatar || DEFAULT_AVATAR}
                               alt="author"
                               fill
                             />

@@ -1,3 +1,4 @@
+import { useHeader } from "@/contexts";
 import { usePosts } from "@/hooks";
 import { postService } from "@/services";
 import { commentSchema } from "@/utils";
@@ -12,10 +13,10 @@ interface ICommentForm {
     content?: string;
     id?: string;
     setIsUpdate?: (val) => void;
+    autoFocus?: boolean
 }
 
-export const CommentForm = ({ postId, isUpdate, content, id, setIsUpdate }: ICommentForm) => {
-    console.log("🚀 ~ CommentForm ~ content:", content)
+export const CommentForm = ({ postId, isUpdate, content, id, setIsUpdate, autoFocus }: ICommentForm) => {
     const {
         register,
         handleSubmit,
@@ -27,8 +28,9 @@ export const CommentForm = ({ postId, isUpdate, content, id, setIsUpdate }: ICom
             content: content || ''
         }
     });
+    const { currentPage } = useHeader()
 
-    const { refetch } = usePosts({})
+    const { refetch } = usePosts({ page: currentPage, limit: 2 })
 
     const { mutate, isPending } = useMutation({
         mutationFn: (form: any) => isUpdate ? postService.updateComment(form) : postService.addComment(form),
@@ -87,6 +89,7 @@ export const CommentForm = ({ postId, isUpdate, content, id, setIsUpdate }: ICom
                 <div className="flex relative items-center min-h-12 w-full gap-y-2 overflow-hidden px-3 py-2 transition-all data-[state=edit]:min-h-[90px] data-[state=edit]:flex-col data-[state=edit]:animate-accordion-down data-[state=normal]:animate-accordion-up">
                     <div className="flex flex-col w-full text-base font-normal text-neutral-60">
                         <textarea
+                            autoFocus={autoFocus}
                             name="content"
                             {...register("content")}
                             rows={1}

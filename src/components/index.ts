@@ -3,3 +3,4 @@ export * from "./MetaDataCom";
 export * from "./Posts";
 export * from "./BannerWelcome";
 export * from "./ImagePlacehoderSkeleton";
+export * from "./AvatarUpload";

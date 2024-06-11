@@ -17,13 +17,17 @@ import {
 } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { useAuth, useHeader } from "@/contexts";
-import { ArrayTabs, EMenuType, profileMenuItems } from "@/utils";
+import { ArrayTabs, DEFAULT_AVATAR, EMenuType, EnumTabs, profileMenuItems } from "@/utils";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
     const { user, logout } = useAuth();
     const { activeTab, setActiveTab } = useHeader();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [search, setSearch] = useState('');
     const closeMenu = () => setIsMenuOpen(false);
+
+    const router = useRouter()
 
     const handleClickMenuItem = useCallback((type: string) => {
         closeMenu();
@@ -32,17 +36,20 @@ export const Header = () => {
                 logout();
                 break;
             }
+            case EMenuType.profile: {
+                router.push(`/users/${user?.username}`)
+            }
 
             default:
                 break;
         }
-    }, []);
+    }, [user]);
 
     return (
         <header className="fixed  top-0 z-header h-16 w-screen gap-x-6 border-b bg-white px-6 flex items-center justify-center xl:gap-x-12 xl:px-12 shadow-shadow1">
             <div className="container h-full flex items-center justify-around">
                 <div className="hidden min-w-72 max-w-80 grow xl:flex h-full flex-1">
-                    <a href="" className="gap-x-1.5 flex justify-center items-center">
+                    <a href="/home" className="gap-x-1.5 flex justify-center items-center">
                         <Image
                             alt="bic logo icon"
                             loading="lazy"
@@ -82,7 +89,12 @@ export const Header = () => {
                                 <Tab
                                     key={value}
                                     value={value}
-                                    onClick={() => setActiveTab(value)}
+                                    onClick={() => {
+                                        setActiveTab(value)
+                                        if (value === EnumTabs.home) {
+                                            router.push('/home')
+                                        }
+                                    }}
                                     className={`flex h-12 w-20 flex-col justify-between rounded-t-lg hover:bg-neutral-2 ${activeTab === value ? "text-gray-900" : ""
                                         }`}
                                 >
@@ -97,6 +109,8 @@ export const Header = () => {
                     </Tabs>
                     <div className="relative grow">
                         <Input
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                             type="search"
                             color="black"
                             label="Type here..."
@@ -106,6 +120,13 @@ export const Header = () => {
                             size="sm"
                             color="white"
                             className="!absolute right-1 top-1 rounded max-w-[80px]"
+                            onClick={() => {
+                                if (search) {
+                                    setActiveTab('')
+                                    router.push(`/search?search=${search}`)
+                                    setSearch('')
+                                }
+                            }}
                         >
                             Search
                         </Button>
@@ -122,7 +143,7 @@ export const Header = () => {
                             <Image
                                 className="!box-border aspect-square h-full w-full object-cover overflow-hidden bg-neutral-1 border-neutral-1 border-[1.5px] rounded-full"
                                 alt="Avatar"
-                                src="https://bic-pro-entity-attribute-s3-bucket.s3.ap-southeast-1.amazonaws.com/static/user/default-avatar.png"
+                                src={user?.avatar || DEFAULT_AVATAR}
                                 width={30}
                                 height={30}
                             />

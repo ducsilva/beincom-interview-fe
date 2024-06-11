@@ -1,6 +1,6 @@
-import { useAuth } from "@/contexts";
+import { useAuth, useHeader } from "@/contexts";
 import { IComment } from "@/types";
-import { EActionType, commentMenuItems } from "@/utils";
+import { DEFAULT_AVATAR, EActionType, commentMenuItems } from "@/utils";
 import { AdjustmentsVerticalIcon } from "@heroicons/react/24/solid";
 import {
     Button,
@@ -25,7 +25,8 @@ interface ICommentProps {
 
 export const CommentDetail = ({ comment, postId }: ICommentProps) => {
     const { user } = useAuth();
-    const { refetch } = usePosts({})
+    const { currentPage } = useHeader();
+    const { refetch } = usePosts({ page: currentPage, limit: 2 });
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
 
@@ -35,40 +36,43 @@ export const CommentDetail = ({ comment, postId }: ICommentProps) => {
 
     const handleClickMenuItem = useCallback((type: string) => {
         if (type === EActionType.delete) {
-            mutate({ id: comment.id }, {
-                onSuccess: async (res) => {
-                    refetch()
-                    toast("Delete comment successfully", {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        style: {
-                            color: "#4A6CF7",
-                            backgroundColor: "#fff",
-                        },
-                    });
-                    setIsMenuOpen(false)
-                },
-                onError: (err: any) => {
-                    toast(err?.data?.message || "Error", {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        style: {
-                            color: "#4A6CF7",
-                            backgroundColor: "#fff",
-                        },
-                    });
-                },
-            });
+            mutate(
+                { id: comment.id },
+                {
+                    onSuccess: async (res) => {
+                        refetch();
+                        toast("Delete comment successfully", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: {
+                                color: "#4A6CF7",
+                                backgroundColor: "#fff",
+                            },
+                        });
+                        setIsMenuOpen(false);
+                    },
+                    onError: (err: any) => {
+                        toast(err?.data?.message || "Error", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: {
+                                color: "#4A6CF7",
+                                backgroundColor: "#fff",
+                            },
+                        });
+                    },
+                }
+            );
         } else if (type === EActionType.update) [setIsUpdate(true)];
     }, []);
 
@@ -78,7 +82,10 @@ export const CommentDetail = ({ comment, postId }: ICommentProps) => {
                 <Image
                     className="!box-border aspect-square object-cover overflow-hidden bg-neutral-1 border-neutral-1 border-[1.5px] rounded-full"
                     alt={"Avatar"}
-                    src="https://bic-pro-entity-attribute-s3-bucket.s3.ap-southeast-1.amazonaws.com/static/user/default-avatar.png"
+                    src={
+                        comment?.userId?.avatar
+                        || DEFAULT_AVATAR
+                    }
                     width={50}
                     height={50}
                 />
@@ -91,12 +98,13 @@ export const CommentDetail = ({ comment, postId }: ICommentProps) => {
                         id={comment.id}
                         content={comment.content}
                         setIsUpdate={setIsUpdate}
+                        autoFocus
                     />
                 ) : (
                     <div className="flex flex-col">
                         <a href={`/users/${comment?.userId?.username}`}>
                             <span className="relative flex shrink-0 cursor-pointer font-semibold">
-                                {comment?.userId?.fullname}
+                                {comment?.userId?.username}
                             </span>
                         </a>
                         <div className="text-base font-normal text-neutral-60 break-word">

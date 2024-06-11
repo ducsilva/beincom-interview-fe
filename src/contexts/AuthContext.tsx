@@ -24,23 +24,27 @@ export const AuthProvider = ({ children }) => {
     setLoading(false)
   }, [])
 
-  const { data }: { data: any } = useQuery({
+  const { data, refetch }: { data: any, refetch?: () => void } = useQuery({
     queryKey: [QueryKeys.PROFILE],
     queryFn: () => userService.getProfile(),
     enabled: !!accessToken,
   });
 
+  useEffect(() => {
+    if (accessToken) {
+      refetch()
+    }
+  }, [accessToken, refetch])
 
   useEffect(() => {
-    if (!!data) {
+    if (data) {
       setUser(data);
     }
 
-  }, [!!data]);
+  }, [data]);
 
 
   const logout = () => {
-    console.log('logged out')
     setUser(null);
     setAccessToken('');
     localStorage.removeItem(TOKEN_MANAGEMENT.ACCESS_TOKEN);
@@ -49,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ user, setUser, accessToken, loading, logout }}>
+    <AuthContext.Provider value={{ user, setUser, accessToken, loading, logout, refetchProfile: refetch }}>
       {children}
     </AuthContext.Provider>
   );

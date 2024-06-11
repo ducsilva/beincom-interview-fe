@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Button } from "@material-tailwind/react";
 import { createCategorySChema } from "@/utils";
-import { useCategory, usePosts } from "@/hooks";
+import { useCategory } from "@/hooks";
 
 interface ICategoryProps {
   closeModal?: () => void;
@@ -27,7 +27,8 @@ const customStyles = {
     overflow: "auto"
   },
   overlay: {
-    backgroundColor: '#1b1d22cc'
+    backgroundColor: '#1b1d22cc',
+    zIndex: 40
   }
 };
 
