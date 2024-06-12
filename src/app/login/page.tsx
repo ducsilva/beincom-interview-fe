@@ -4,7 +4,6 @@ import { ISignIn } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 import { authService } from "@/services";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/AuthContext";
 import { Metadata } from "next";
 import { BannerWelcome, MetaDataCom } from "@/components";
 import { useForm } from "react-hook-form";
@@ -20,7 +19,6 @@ const metadata: Metadata = {
 
 const LoginPage = () => {
     const [isShow, setIsShow] = useState(false);
-    const { setUser } = useAuth();
     const router = useRouter();
     const {
         register,
